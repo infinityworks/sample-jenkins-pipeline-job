@@ -3,6 +3,9 @@ node {
    stage 'Checkout'
    checkout scm
 
+   sh "sudo chown jenkins /var/run/docker.sock"
+   sh "sudo chown jenkins /usr/bin/docker"
+
    stage 'Build application'
 
    def mvnHome = tool 'M3'
