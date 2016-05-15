@@ -3,10 +3,11 @@ node {
    stage 'Checkout'
    checkout scm
 
+   // workaround to let user jenkins to run docker commands without sudo as not supported by the cloudbee plugin
    sh "sudo chown jenkins /var/run/docker.sock"
    sh "sudo chown jenkins /usr/bin/docker"
 
-   stage 'Build application'
+   stage 'Build application and Run Unit Test'
 
    def mvnHome = tool 'M3'
    sh "${mvnHome}/bin/mvn clean package"

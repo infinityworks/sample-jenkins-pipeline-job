@@ -20,6 +20,7 @@ public class AcceptanceTest {
 
     private static final int PORT = 8181;
     private Client client;
+    private static final String JENKINS_HOST = "ec2-54-171-226-99.eu-west-1.compute.amazonaws.com";
 
     @Before
     public void setUp() throws Exception {
@@ -30,7 +31,7 @@ public class AcceptanceTest {
     @Test
     public void testHelloWorld() throws Exception {
         final Optional<String> name = Optional.fromNullable("Dr. IntegrationTest");
-        final Saying saying = client.target("http://192.168.99.100:" + PORT + "/hello-world")
+        final Saying saying = client.target("http://" + JENKINS_HOST + ":" + PORT + "/hello-world")
                 .queryParam("name", name.get())
                 .request()
                 .get(Saying.class);
@@ -40,7 +41,7 @@ public class AcceptanceTest {
     @Test
     public void testPostPerson() throws Exception {
         final Person person = new Person("Dr. IntegrationTest", "Chief Wizard");
-        final Person newPerson = client.target("http://192.168.99.100:" + PORT + "/people")
+        final Person newPerson = client.target("http://" + JENKINS_HOST + ":"  + PORT + "/people")
                 .request()
                 .post(Entity.entity(person, MediaType.APPLICATION_JSON_TYPE))
                 .readEntity(Person.class);
