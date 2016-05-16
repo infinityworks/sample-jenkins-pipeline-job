@@ -20,7 +20,7 @@ public class AcceptanceTest {
 
     private static final int PORT = 8181;
     private Client client;
-    private static final String JENKINS_HOST = "ec2-54-171-226-99.eu-west-1.compute.amazonaws.com";
+    private static final String JENKINS_HOST = "ec2-54-171-58-28.eu-west-1.compute.amazonaws.com";
 
     @Before
     public void setUp() throws Exception {
