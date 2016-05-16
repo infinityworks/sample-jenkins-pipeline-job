@@ -28,10 +28,10 @@ node {
    step([$class: 'JUnitResultArchiver', testResults: '**/target/failsafe-reports/TEST-*.xml'])
 
    stage 'Run SonarQube analysis'
-   sh "${mvnHome}/bin/mvn clean package sonar:sonar -Dsonar.host.url=http://sonar:9000"
+   sh "${mvnHome}/bin/mvn clean test sonar:sonar -Dsonar.host.url=http://sonar:9000"
 
    stage 'Push image'
-   docker.withRegistry("http://nexus:8081/repository/registry.nexus/", "nexus-registry") {
+   docker.withRegistry("http://10.42.136.56:8081/repository/registry.nexus/", "nexus-registry") {
           image.push()
    }
 
