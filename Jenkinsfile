@@ -28,7 +28,7 @@ node {
    step([$class: 'JUnitResultArchiver', testResults: '**/target/failsafe-reports/TEST-*.xml'])
 
    stage 'Run SonarQube analysis'
-   sh "${mvnHome}/bin/mvn clean package sonar:sonar"
+   sh "${mvnHome}/bin/mvn clean package sonar:sonar -Dsonar.host.url=http://sonar:9000"
 
    stage 'Push image'
    docker.withRegistry("https://registry.infinityworks.com", "docker-registry") {
