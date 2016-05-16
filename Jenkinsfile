@@ -31,7 +31,7 @@ node {
    sh "${mvnHome}/bin/mvn clean package sonar:sonar -Dsonar.host.url=http://sonar:9000"
 
    stage 'Push image'
-   docker.withRegistry("https://registry.infinityworks.com", "docker-registry") {
+   docker.withRegistry("http://nexus:8081/repository/registry.nexus/", "nexus-registry") {
           image.push()
    }
 
