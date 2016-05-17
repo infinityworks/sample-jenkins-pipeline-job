@@ -31,7 +31,7 @@ node {
    sh "${mvnHome}/bin/mvn clean test sonar:sonar -Dsonar.host.url=http://sonar:9000"
 
    stage 'Push image'
-   docker.withRegistry("https://nexus:8443/repository/registry.nexus/", "nexus-registry") {
+   docker.withRegistry("https://10.42.214.73:18443/repository/registry.nexus/", "nexus-registry") {
           image.push()
    }
 
