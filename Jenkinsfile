@@ -28,6 +28,7 @@ node {
    step([$class: 'JUnitResultArchiver', testResults: '**/target/failsafe-reports/TEST-*.xml'])
 
    stage 'Run SonarQube analysis'
+   sh "${mvnHome}/bin/mvn clean mvn org.jacoco:jacoco-maven-plugin:0.7.4.201502262128:prepare-agent test -Psonar"
    sh "${mvnHome}/bin/mvn clean test sonar:sonar -Dsonar.host.url=http://sonar:9000"
 
    stage 'Push image'
