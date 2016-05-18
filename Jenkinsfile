@@ -31,7 +31,7 @@ node ('master'){
 
    stage 'Push image'
    docker.withRegistry("https://10.42.214.73:18444/repository/registry.nexus/", "nexus-registry") {
-      sh "tag=$(git rev-parse --short HEAD)"
+      tag=sh("\$(git rev-parse --short HEAD)"
       image.tag("latest", false)
       image.tag("${tag}", false)
       image.push()
