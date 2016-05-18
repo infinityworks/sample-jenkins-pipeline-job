@@ -27,7 +27,7 @@ node ('master'){
    sh "${mvnHome}/bin/mvn clean package org.jacoco:jacoco-maven-plugin:prepare-agent"
    sh "${mvnHome}/bin/mvn package sonar:sonar -Dsonar.host.url=http://sonar:9000"
 
-   input message: 'Does http://10.42.85.36:9000/dashboard/index/io.dropwizard:dropwizard-example look good?', ok: 'Publish image', submitter: 'dev-team'
+   input "Does http://10.42.85.36:9000/dashboard/index/io.dropwizard:dropwizard-example look good?"
 
    stage 'Push image'
    docker.withRegistry("https://10.42.214.73:18444/repository/registry.nexus/", "nexus-registry") {
