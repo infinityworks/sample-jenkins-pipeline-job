@@ -24,7 +24,7 @@ node ('master'){
    step([$class: 'JUnitResultArchiver', testResults: '**/target/failsafe-reports/TEST-*.xml'])
 
    stage 'Run SonarQube analysis'
-   sh "${mvnHome}/bin/mvn clean package org.jacoco:jacoco-maven-plugin:prepare-agent"
+   sh "${mvnHome}/bin/mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test"
    sh "${mvnHome}/bin/mvn package sonar:sonar -Dsonar.host.url=http://sonar:9000"
 
    input "Does http://10.42.85.36:9000/dashboard/index/io.dropwizard:dropwizard-example look good?"
