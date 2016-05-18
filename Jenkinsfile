@@ -1,11 +1,7 @@
-node {
+node ('master'){
    // Mark the code checkout 'stage'....
    stage 'Checkout'
    checkout scm
-
-   // workaround to let user jenkins to run docker commands without sudo as not supported by the cloudbee plugin
-   sh "sudo chown jenkins /var/run/docker.sock"
-   sh "sudo chown jenkins /usr/bin/docker"
 
    stage 'Build application and Run Unit Test'
 
@@ -35,6 +31,5 @@ node {
    docker.withRegistry("https://10.42.214.73:18444/repository/registry.nexus/", "nexus-registry") {
           image.push()
    }
-
 
 }
