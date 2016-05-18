@@ -28,8 +28,8 @@ node {
    step([$class: 'JUnitResultArchiver', testResults: '**/target/failsafe-reports/TEST-*.xml'])
 
    stage 'Run SonarQube analysis'
-   sh "${mvnHome}/bin/mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test -Psonar"
-   sh "${mvnHome}/bin/mvn clean test sonar:sonar -Dsonar.host.url=http://sonar:9000"
+   sh "${mvnHome}/bin/mvn clean package org.jacoco:jacoco-maven-plugin:prepare-agent -Psonar"
+   sh "${mvnHome}/bin/mvn package sonar:sonar -Dsonar.host.url=http://sonar:9000"
 
    stage 'Push image'
    docker.withRegistry("https://10.42.214.73:18444/repository/registry.nexus/", "nexus-registry") {
