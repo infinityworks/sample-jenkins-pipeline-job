@@ -25,13 +25,13 @@ node ('master'){
 
    stage 'Run SonarQube analysis'
    sh "${mvnHome}/bin/mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test"
-   sh "${mvnHome}/bin/mvn package sonar:sonar -Dsonar.host.url=http://sonar:9000"
+   sh "${mvnHome}/bin/mvn package sonar:sonar -Dsonar.host.url=http://54.194.46.25:9000"
 
    input "Does http://10.42.85.36:9000/dashboard/index/io.dropwizard:dropwizard-example look good?"
 
    stage 'Push image'
 
-   docker.withRegistry("https://10.42.214.73:18444/repository/registry.nexus/", "nexus-registry") {
+   docker.withRegistry("https://registry.infinityworks.com", "docker-registry") {
       //tag=sh "\$(git rev-parse --short HEAD)"
       image.tag("latest", false)
       image.push()
