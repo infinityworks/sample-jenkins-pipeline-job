@@ -25,7 +25,7 @@ node ('master'){
 
    stage 'Run SonarQube analysis'
    sh "${mvnHome}/bin/mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test"
-   sh "${mvnHome}/bin/mvn package sonar:sonar -Dsonar.host.url=http://54.171.187.14:9000"
+   sh "${mvnHome}/bin/mvn package sonar:sonar -Dsonar.host.url=http://ec2-54-171-187-14.eu-west-1.compute.amazonaws.com:9000"
 
    input "Does http://10.42.85.36:9000/dashboard/index/io.dropwizard:dropwizard-example look good?"
 
