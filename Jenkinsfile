@@ -5,7 +5,7 @@ node ('master'){
 
    stage 'Build application and Run Unit Test'
 
-   def mvnHome = tool 'M3'
+   //def mvnHome = tool 'M3'
    sh "${mvnHome}/bin/mvn clean package"
 
    step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
